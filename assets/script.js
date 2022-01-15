@@ -7,11 +7,11 @@ var rowContainer = document.querySelector(".rowContainer");
 var save = document.querySelector(".saveBtn");
 
 // Creates an array designating timeslots
-var times = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22];
+var times = [9, 10, 11, 12, 13, 14, 15, 16, 17];
 
 var scheduleText = [];
 
-// Creates a row for each timeslot, including text input and save button
+// Creates a row for each timeslot, including hour, text input and save button
 function createRow (time) {
     var row = document.createElement("div");
     row.classList.add("row");
@@ -21,7 +21,7 @@ function createRow (time) {
     row.appendChild(hourCol);
     var textCol = document.createElement("div");
     textCol.classList.add("col-6");
-    // Create a variable using the current time
+    // Creates a variable using the current time
     var currentHour = Number(moment().format("H"));
     // If time slot is earlier than current time, adds .past class
     if(time < currentHour){
@@ -38,7 +38,6 @@ function createRow (time) {
     row.appendChild(textCol);
     var textInput = document.createElement("textarea");
     textInput.classList.add("textarea");
-    textInput.setAttribute("beta-time", time);
     textCol.appendChild(textInput);
     var saveCol = document.createElement("div");
     saveCol.classList.add("col", "hour");
@@ -47,8 +46,10 @@ function createRow (time) {
     saveBtn.classList.add("saveBtn");
     saveBtn.textContent = "Save";
     saveCol.appendChild(saveBtn);
+    // When save button is clicked, text user has inputted is saved to local storage
     saveBtn.addEventListener("click", function() {
         event.preventDefault()
+        
         if (textInput.value === "") {
             window.alert("Please enter a message to save.");
         } else {
@@ -60,11 +61,13 @@ function createRow (time) {
 
         
     })
-
+    
+    
     displayMessage()
 
     return row
 
+    // Retrieves saved text from storage and displays in textarea
     function displayMessage() {
         var userSchedule = JSON.parse(localStorage.getItem("scheduleText"));
         if (scheduleText !== null) {
@@ -81,7 +84,7 @@ function createRow (time) {
     
 
 
-
+// Creates row for each time given in the array, and appends rows to the container div
 for (var i = 0; i < times.length; i++) {
     var time = times[i]
     var row = createRow (time);
@@ -89,9 +92,5 @@ for (var i = 0; i < times.length; i++) {
     
 }
 
-createRow ()
 
-
-// when save clicked, user input saved to local storage and displayed in relevant timeblock
-// stays on refresh
 
