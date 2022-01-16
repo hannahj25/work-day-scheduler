@@ -54,7 +54,7 @@ function createRow (time) {
             window.alert("Please enter a message to save.");
         } else {
             scheduleText.push(textInput.value);
-            localStorage.setItem("scheduleText", JSON.stringify(scheduleText));
+            localStorage.setItem(time, JSON.stringify(scheduleText));
 
 
         }
@@ -69,11 +69,11 @@ function createRow (time) {
 
     // Retrieves saved text from storage and displays in textarea
     function displayMessage() {
-        var userSchedule = JSON.parse(localStorage.getItem("scheduleText"));
+        var userSchedule = JSON.parse(localStorage.getItem(time));
         if (scheduleText !== null) {
             textInput.textContent = userSchedule;
         }
-        $(".textarea").val(localStorage.getItem("scheduleText"));
+        //$(".textarea").val(localStorage.getItem("scheduleText"));
 
     }   
 
