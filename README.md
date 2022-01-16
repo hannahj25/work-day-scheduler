@@ -21,6 +21,8 @@ Moment.js
 
 ## Link
 
+https://hannahj25.github.io/work-day-scheduler/
+
 ## Acknowledgements
 
 This project was built off of base code (HTML, CSS) provided by the University of Adelaide's Coding Boot Camp.
