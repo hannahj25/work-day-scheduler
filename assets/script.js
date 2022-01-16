@@ -46,18 +46,15 @@ function createRow (time) {
     saveBtn.classList.add("saveBtn");
     saveBtn.textContent = "Save";
     saveCol.appendChild(saveBtn);
-    // When save button is clicked, text user has inputted is saved to local storage
+    // When save button is clicked, text that user has inputted is saved to local storage
     saveBtn.addEventListener("click", function() {
         event.preventDefault()
+        scheduleText.push(textInput.value);
+        localStorage.setItem(time, JSON.stringify(scheduleText));
+        scheduleText = [];
+
+
         
-        if (textInput.value === "") {
-            window.alert("Please enter a message to save.");
-        } else {
-            scheduleText.push(textInput.value);
-            localStorage.setItem(time, JSON.stringify(scheduleText));
-
-
-        }
 
         
     })
@@ -70,10 +67,7 @@ function createRow (time) {
     // Retrieves saved text from storage and displays in textarea
     function displayMessage() {
         var userSchedule = JSON.parse(localStorage.getItem(time));
-        if (scheduleText !== null) {
             textInput.textContent = userSchedule;
-        }
-        //$(".textarea").val(localStorage.getItem("scheduleText"));
 
     }   
 
